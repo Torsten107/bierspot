@@ -1,0 +1,15 @@
++++
+date = '2025-09-01T21:12:41+02:00'
+draft = false
+title = 'Biergeschichte'
++++
+
+Die frühesten Nachweise für Bier gibt es aus dem altmesopotamischen Raum. Die Ägypter ließen halbfertig gebackenes Brot mit Wasser vergären und bekamen so eine Art Bier, das auch den Göttern gut gewogen sein dürfte. Ein Hauptgott der frühen ägyptischen Mythologie war Horus, der Himmelsgott. Daneben war er Königsgott, ein Welten- oder Lichtgott und hatte als Beschützer ein Auge auf die Kinder des Landes &#8211; Eye of Horus beschützt euch. 
+
+Bei den Römern hieß das Bier Cervisia, nach der Göttin der Feldfrüchte, Ceres. Den Römern galt es als barbarisches Getränk. Die Kelten kannten Bier unter dem Namen Korma. Klosterbrauereien führten im Mittelalter den geregelten Braubetrieb ein. Damals galt Bier auch als geeignetes Getränk für Kinder, da es einen geringeren Alkoholgehalt hatte als heute und das Bier durch das Kochen der Bierwürze weitgehend keimfrei war, was man vom Wasser nicht behaupten konnte.
+
+Es war ferner wegen seines hohen Kaloriengehalts eine wichtige Ergänzung der oft knappen Nahrung, da man als Bier auch minderwertiges Getreide noch halbwegs genießen konnte. Angesichts des hohen Bierkonsums im Mittelalter und in der frühen Neuzeit war Bier für den städtischen Fiskus und die seit etwa 1500 entstehenden Landessteuerbehörden von großem Interesse. Bereits im Spätmittelalter wurden fast überall im Reich Produktions- und Verkaufssteuern auf Bier erhoben. Dieses Bier wurde grundsätzlich mit obergäriger Hefe, sog. „Oberzeug“, gebraut.
+
+Nachdem in Kellern und Kühlhäusern auch bei niedrigen Temperaturen vergoren werden konnte, setzte sich bald die untergärige Brauweise durch. Bereits 1841 wurde das untergärige Lagerbier von Anton Dreher in Wien gebraut und läutete damit die Epoche der untergärigen Biersorten ein. Als wichtiger Punkt in der Geschichte des Bierbrauens wird die „Erfindung“ der Pilsner Brauart angesehen. Sie ging aus der schon damals berühmten Bayerischen Brauart hervor, die vor allem auf nur leicht geröstetem Malz und auf der langsamen Gärung durch Lagerung in kalten Höhlen und tiefen Kellern beruhte.
+
+Josef Groll braute somit am 5. Oktober 1842 den ersten Sud nach Pilsner Brauart. Dieser wurde erstmals am 11. November 1842 öffentlich ausgeschenkt und eröffnete so den weltweiten Siegeszug dieser Bierspezialität, die als Original Pilsner Urquell vertrieben wird. In Deutschland wurde untergäriges Bier bis 1993 nach dem Biersteuergesetz, umgangssprachlich als Reinheitsgebot von 1516 bekannt, gebraut. Darin waren Teile des ursprünglichen Reinheitsgebotes enthalten, nach dem nur Wasser, Hopfen und Malz (und Hefe) als Zutaten erlaubt waren. Seit 1993 ist die Herstellung von Bier in Deutschland im vorläufigen Biergesetz (BGBl. I 1993 S. 1400–1401) geregelt. Bier ist heutzutage das in Deutschland und vielen anderen Ländern meistgetrunkene alkoholische Getränk.

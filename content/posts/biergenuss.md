@@ -1,7 +1,9 @@
----
-title: "Biergenuss"
-date: 2025-09-02
----
++++
+date = '2025-09-02T21:31:35+02:00'
+draft = false
+title = 'Biergenuss'
++++
+
 Ein gutes Bier braucht mehr als nur guten Geschmack. Es muss gut aussehen und nicht zuletzt ist auch der Geruch entscheidend für den optimalen Biergenuss.
 
 Wenn ihr euer Bier genießen wollen, kippt es es nicht einfach in euch hinein. Gönnt euch ein paar Augenblicke und hebt euer Glas, lasst es das Licht einfangen und euch fort tragen vom schönen Anblick des Bieres.
