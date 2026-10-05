@@ -1,0 +1,14 @@
+<footer class="fuss">
+  <div class="wrap fuss__inner">
+    <p class="fuss__claim">{{ site.Params.description }}</p>
+    <nav aria-label="Weitere Seiten">
+      <ul>
+        {{- range site.Menus.footer }}
+        <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+        {{- end }}
+        <li><a href="{{ "index.xml" | relURL }}">RSS</a></li>
+      </ul>
+    </nav>
+    <p class="fuss__klein">© {{ now.Year }} {{ site.Title }}</p>
+  </div>
+</footer>

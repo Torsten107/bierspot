@@ -1,0 +1,17 @@
+<div class="tabelle">
+<table>
+  <thead>
+    <tr><th scope="col">Merkmal</th><th scope="col">1</th><th scope="col">3</th><th scope="col">5</th></tr>
+  </thead>
+  <tbody>
+    {{- range hugo.Data.profil.merkmale }}
+    <tr>
+      <th scope="row">{{ .name }}</th>
+      <td>{{ index .stufen "1" }}</td>
+      <td>{{ index .stufen "3" }}</td>
+      <td>{{ index .stufen "5" }}</td>
+    </tr>
+    {{- end }}
+  </tbody>
+</table>
+</div>

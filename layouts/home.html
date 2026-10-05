@@ -1,0 +1,50 @@
+{{ define "main" }}
+<section class="buehne">
+  <p class="buehne__dach">{{ site.Params.untertitel }}</p>
+  <h1 class="buehne__titel">Ehrliche Biertests, die dir erklären, was zu deinem Essen passt und warum.</h1>
+  <div class="buehne__aktionen">
+    <a class="knopf" href="{{ "food-pairing/" | relURL }}">Welches Bier passt zu meinem Essen?</a>
+    <a class="knopf knopf--leise" href="{{ "biertests/" | relURL }}">Zu den Biertests</a>
+  </div>
+</section>
+
+{{- $tests := where (where site.RegularPages "Section" "biertests") "Params.stufe" "!=" "kurz" }}
+{{- with $tests }}
+<section class="block">
+  <div class="block__kopf">
+    <h2>Neueste Biertests</h2>
+    <a href="{{ "biertests/" | relURL }}">Alle Tests</a>
+  </div>
+  <div class="karten">
+    {{- range first 6 . }}{{ partial "biercard.html" . }}{{ end }}
+  </div>
+</section>
+{{- end }}
+
+<section class="block teaser">
+  <div>
+    <h2>Das Geschmacksprofil</h2>
+    <p>Jedes getestete Bier bekommt fünf Werte von 1 bis 5: Bittere, Malz, Frucht, Röstaromen und Körper. Daraus entsteht ein Netz, an dem du auf einen Blick siehst, wie ein Bier schmeckt.</p>
+    <p><a href="{{ "so-bewerte-ich/" | relURL }}">So bewerte ich</a></p>
+  </div>
+  <figure class="teaser__bild">
+    {{ partial "spinnennetz.html" (dict "profil" (index hugo.Data.stile "Märzen").profil) }}
+    <figcaption class="klein">Beispiel: ein typisches Märzen</figcaption>
+  </figure>
+</section>
+
+{{- $posts := where site.RegularPages "Section" "posts" }}
+{{- with $posts }}
+<section class="block">
+  <div class="block__kopf">
+    <h2>Beiträge</h2>
+    <a href="{{ "posts/" | relURL }}">Alle Beiträge</a>
+  </div>
+  <ul class="liste">
+    {{- range first 5 . }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
+{{ end }}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale | default "de" }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{- $titel := cond .IsHome site.Title (printf "%s | %s" .Title site.Title) }}
+  <title>{{ $titel }}</title>
+  {{- $desc := site.Params.description -}}
+  {{- with .Params.fazit }}{{ $desc = . }}{{ else }}{{ with .Description }}{{ $desc = . }}{{ else }}{{ if and .IsPage .Summary }}{{ $desc = .Summary | plainify | truncate 160 }}{{ end }}{{ end }}{{ end }}
+  <meta name="description" content="{{ $desc }}">
+  <link rel="canonical" href="{{ .Permalink }}">
+  {{- if eq .Params.stufe "kurz" }}
+  <meta name="robots" content="noindex, follow">
+  {{- end }}
+  <meta property="og:title" content="{{ $titel }}">
+  <meta property="og:description" content="{{ $desc }}">
+  <meta property="og:type" content="{{ cond .IsPage "article" "website" }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:locale" content="de_DE">
+  <meta name="theme-color" content="#fbf8f2" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1b1916" media="(prefers-color-scheme: dark)">
+  {{- with .OutputFormats.Get "rss" }}
+  <link rel="alternate" type="application/rss+xml" href="{{ .RelPermalink }}" title="{{ site.Title }}">
+  {{- end }}
+  {{- $css := resources.Get "css/main.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='7' y='9' width='14' height='19' rx='2' fill='%23e8a33d'/%3E%3Cpath d='M21 13h3a3 3 0 0 1 3 3v4a3 3 0 0 1-3 3h-3' fill='none' stroke='%23e8a33d' stroke-width='2.5'/%3E%3Cpath d='M6 9c0-3 3-5 5-4 1-2 5-2 6 0 2-1 5 1 5 4z' fill='%23fff7e6' stroke='%23c98a2b'/%3E%3C/svg%3E">
+</head>
+<body>
+  <a class="skip" href="#inhalt">Zum Inhalt springen</a>
+  {{ partial "header.html" . }}
+  <main id="inhalt" class="wrap">
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+</body>
+</html>

@@ -1,0 +1,29 @@
+{{ define "main" }}
+<header class="seitenkopf">
+  <h1>Bierstile</h1>
+  <div class="einleitung"><p>Jeder Stil mit Kurzbeschreibung und typischem Geschmacksprofil. Darunter findest du die Biere, die ich in diesem Stil getestet habe.</p></div>
+</header>
+{{- $vergeben := .Data.Terms }}
+<div class="karten">
+  {{- $seiten := dict }}
+  {{- range site.Taxonomies.stile }}{{ $seiten = merge $seiten (dict .Page.Title .Page) }}{{ end }}
+  {{- range $name, $stil := hugo.Data.stile }}
+  {{- $term := index $seiten $name }}
+  <article class="karte">
+    <a class="karte__link" href="{{ with $term }}{{ .RelPermalink }}{{ else }}{{ "food-pairing/" | relURL }}{{ end }}">
+      <div class="karte__netz">{{ partial "spinnennetz.html" (dict "profil" $stil.profil "klein" true) }}</div>
+      <div class="karte__text">
+        <h2 class="karte__titel">{{ $name }}</h2>
+        <p class="karte__fazit">{{ $stil.text }}</p>
+        <p class="karte__meta">
+          {{- with $term -}}
+            {{- $t := len (where .Pages "Params.stufe" "!=" "kurz") }}{{ $k := len (where .Pages "Params.stufe" "kurz") -}}
+            {{- if $t }}{{ $t }} {{ cond (eq $t 1) "Test" "Tests" }}{{ end }}{{ if and $t $k }} · {{ end }}{{ if $k }}{{ $k }} kurz notiert{{ end -}}
+          {{- else }}Noch kein Bier{{ end -}}
+        </p>
+      </div>
+    </a>
+  </article>
+  {{- end }}
+</div>
+{{ end }}

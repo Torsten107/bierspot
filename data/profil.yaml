@@ -1,0 +1,34 @@
+# Die fünf Merkmale des Geschmacksprofils. Reihenfolge = Reihenfolge im Spinnennetz.
+# Jeder Biertest gibt pro Merkmal einen Wert von 1 bis 5 an.
+merkmale:
+  - key: bittere
+    name: Bittere
+    stufen:
+      1: "Kaum spürbar, wie Weißbier"
+      3: "Deutlich, aber rund, wie Helles bis Pils"
+      5: "Kräftig und lange anhaltend, wie IPA"
+  - key: malz
+    name: Malz
+    stufen:
+      1: "Schlank und trocken, wie Pils"
+      3: "Brotig, leicht süß, wie Märzen"
+      5: "Sehr süß, Karamell, wie Doppelbock"
+  - key: frucht
+    name: Frucht
+    stufen:
+      1: "Keine Frucht, wie Pils"
+      3: "Spürbar, etwa Banane oder Zitrus, wie Kölsch bis Weißbier"
+      5: "Prägt das Bier, wie IPA oder Fruchtbier"
+  - key: roest
+    name: Röstaromen
+    kurz: Röst
+    stufen:
+      1: "Keine, wie Helles"
+      3: "Leicht, Brotkruste, wie Dunkles"
+      5: "Kaffee und Schokolade, wie Stout"
+  - key: koerper
+    name: Körper
+    stufen:
+      1: "Wässrig und leicht, wie Leichtbier"
+      3: "Mittel, wie Helles"
+      5: "Voll und schwer, wie Doppelbock"

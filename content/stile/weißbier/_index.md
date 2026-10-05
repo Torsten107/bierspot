@@ -1,0 +1,4 @@
+---
+title: "Weißbier"
+slug: "weissbier"
+---

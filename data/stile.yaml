@@ -1,0 +1,55 @@
+# Bierstile mit Kurzbeschreibung und typischem Geschmacksprofil.
+# Der Name muss genauso geschrieben sein wie im Feld "stile" der Biertests.
+# profil: typische Werte von 1 bis 5 (Bittere, Malz, Frucht, Röst, Körper).
+
+Helles:
+  text: "Mild, malzig, wenig bitter. Ein Allrounder."
+  profil: { bittere: 2, malz: 3, frucht: 1, roest: 1, koerper: 2 }
+Pils:
+  text: "Hell, schlank und deutlich herb durch den Hopfen."
+  profil: { bittere: 4, malz: 2, frucht: 1, roest: 1, koerper: 2 }
+Märzen:
+  text: "Bernsteinfarben, vollmundig, mit leichten Karamellnoten."
+  profil: { bittere: 2, malz: 4, frucht: 1, roest: 2, koerper: 3 }
+Dunkles:
+  text: "Dunkles Lager mit Brot- und Röstaromen, wenig bitter."
+  profil: { bittere: 2, malz: 4, frucht: 1, roest: 3, koerper: 3 }
+Schwarzbier:
+  text: "Fast schwarz, trocken, mit feinen Röstnoten."
+  profil: { bittere: 3, malz: 2, frucht: 1, roest: 4, koerper: 2 }
+Weißbier:
+  text: "Obergärig mit Weizen, fruchtig nach Banane und Nelke."
+  profil: { bittere: 1, malz: 2, frucht: 4, roest: 1, koerper: 3 }
+Weizenbock:
+  text: "Starkes Weißbier, fruchtig und kräftig."
+  profil: { bittere: 1, malz: 4, frucht: 4, roest: 2, koerper: 4 }
+Altbier:
+  text: "Obergärig, kupfer- bis dunkelbraun, malzig mit herber Note. Die Spezialität vom Niederrhein."
+  profil: { bittere: 3, malz: 3, frucht: 2, roest: 2, koerper: 3 }
+Kölsch:
+  text: "Hell, leicht und spritzig, dezent fruchtig."
+  profil: { bittere: 2, malz: 2, frucht: 2, roest: 1, koerper: 2 }
+Witbier:
+  text: "Belgisches Weißbier mit Koriander und Orangenschale."
+  profil: { bittere: 1, malz: 2, frucht: 4, roest: 1, koerper: 2 }
+Pale Ale:
+  text: "Hell bis bernstein, fruchtig-hopfig und gut trinkbar."
+  profil: { bittere: 3, malz: 2, frucht: 4, roest: 1, koerper: 2 }
+IPA:
+  text: "Stark gehopft, fruchtig und kräftig bitter."
+  profil: { bittere: 5, malz: 2, frucht: 4, roest: 1, koerper: 3 }
+Bock:
+  text: "Stark und malzbetont, hell oder dunkel."
+  profil: { bittere: 2, malz: 4, frucht: 2, roest: 2, koerper: 4 }
+Doppelbock:
+  text: "Sehr kräftig, süß-malzig, mit Karamell und dunklen Früchten."
+  profil: { bittere: 2, malz: 5, frucht: 3, roest: 2, koerper: 5 }
+Stout:
+  text: "Tiefschwarz, mit Aromen von Kaffee und Schokolade."
+  profil: { bittere: 3, malz: 3, frucht: 1, roest: 5, koerper: 4 }
+Porter:
+  text: "Dunkel und röstig, weicher als ein Stout."
+  profil: { bittere: 2, malz: 3, frucht: 1, roest: 4, koerper: 3 }
+Fruchtbier:
+  text: "Mit Früchten gebraut, oft säuerlich-frisch."
+  profil: { bittere: 1, malz: 2, frucht: 5, roest: 1, koerper: 2 }

@@ -1,0 +1,98 @@
+{{ define "main" }}
+{{- $kurz := eq .Params.stufe "kurz" }}
+{{- $stilname := "" }}{{ $stilprofil := "" }}
+{{- with .Params.stile }}{{ $stilname = index . 0 }}{{ with index hugo.Data.stile (index . 0) }}{{ $stilprofil = .profil }}{{ end }}{{ end }}
+<article class="artikel test">
+  <header class="seitenkopf">
+    <p class="seitenkopf__dach"><a href="{{ "biertests/" | relURL }}">{{ if $kurz }}Kurz notiert{{ else }}Biertest{{ end }}</a></p>
+    <h1>{{ .Title }}</h1>
+    <dl class="steckbrief">
+      {{- with .Params.brauerei }}<div><dt>Brauerei</dt><dd>{{ . }}</dd></div>{{ end }}
+      {{- with .Params.herkunft }}<div><dt>Herkunft</dt><dd>{{ . }}</dd></div>{{ end }}
+      {{- with .GetTerms "stile" }}<div><dt>Stil</dt><dd>{{ range $i, $t := . }}{{ if $i }}, {{ end }}<a href="{{ $t.RelPermalink }}">{{ $t.LinkTitle }}</a>{{ end }}</dd></div>
+      {{- else }}{{ with .Params.untappd_stil }}<div><dt>Stil</dt><dd>{{ . }}</dd></div>{{ end }}{{ end }}
+      {{- with .Params.alkohol }}<div><dt>Alkohol</dt><dd>{{ lang.FormatNumber 1 . }} % vol</dd></div>{{ end }}
+      {{- with .Params.ibu }}<div><dt>Bittereinheiten</dt><dd>{{ . }} IBU</dd></div>{{ end }}
+    </dl>
+  </header>
+
+  {{- if $kurz }}
+  <p class="hinweis"><strong>Kurz notiert.</strong> Dieses Bier habe ich getrunken, aber noch nicht ausführlich getestet. Darum gibt es hier noch kein eigenes Geschmacksprofil.</p>
+
+  <section class="profil">
+    {{- with $stilprofil }}
+    <div class="profil__netz">{{ partial "spinnennetz.html" (dict "profil" . "typisch" true) }}</div>
+    {{- end }}
+    <div class="profil__text">
+      {{- with $.Params.notiz }}
+      <h2>Meine Notiz</h2>
+      <blockquote class="notiz">{{ . }}</blockquote>
+      {{- end }}
+      {{- if and site.Params.zeigeUntappdBewertung $.Params.untappd_bewertung }}
+      <p class="bewertung">Meine Bewertung auf Untappd: <strong>{{ lang.FormatNumber 2 $.Params.untappd_bewertung | replaceRE ",?0+$" "" }} von 5</strong></p>
+      {{- end }}
+      {{- with $stilprofil }}
+      <p class="klein">Das Netz zeigt, wie ein typisches {{ $stilname }} schmeckt, nicht dieses Bier. <a href="{{ "so-bewerte-ich/" | relURL }}">Was die Werte bedeuten</a></p>
+      {{- end }}
+    </div>
+  </section>
+
+  {{- else }}
+  {{- with .Params.profil }}
+  <section class="profil" aria-labelledby="profil-titel">
+    <div class="profil__netz">
+      {{ partial "spinnennetz.html" (dict "profil" . "vergleich" $stilprofil) }}
+    </div>
+    <div class="profil__text">
+      <h2 id="profil-titel">Geschmacksprofil</h2>
+      {{- with $.Params.fazit }}<p class="fazit">{{ . }}</p>{{ end }}
+      <p class="legende">
+        <span class="legende__eigen"></span> Dieses Bier
+        {{- if $stilprofil }}<br><span class="legende__stil"></span> Typisch für {{ $stilname }}{{ end }}
+      </p>
+      <p class="klein"><a href="{{ "so-bewerte-ich/" | relURL }}">Was die Werte bedeuten</a></p>
+    </div>
+  </section>
+  {{- end }}
+  {{- end }}
+
+  {{- with .Content }}
+  <div class="inhalt">
+    {{ . }}
+  </div>
+  {{- end }}
+
+  {{- $gerichte := .Params.passt_zu | default slice }}
+  {{- if and $kurz (not $gerichte) $stilname }}
+    {{- range hugo.Data.pairing.gerichte }}{{ $g := .name }}{{ range .biere }}{{ if eq .stil $stilname }}{{ $gerichte = $gerichte | append $g }}{{ end }}{{ end }}{{ end }}
+  {{- end }}
+  {{- with $gerichte }}
+  <section class="block">
+    <h2>{{ if and $kurz (not $.Params.passt_zu) }}Passt als {{ $stilname }} zu{{ else }}Passt zu{{ end }}</h2>
+    <ul class="chips">
+      {{- range . }}
+      <li><a class="chip" href="{{ "food-pairing/" | relURL }}?gericht={{ . | urlquery }}">{{ . }}</a></li>
+      {{- end }}
+    </ul>
+  </section>
+  {{- end }}
+
+  {{- $verwandt := site.RegularPages.Related . }}
+  {{- $getestet := where (where $verwandt "Section" "biertests") "Params.stufe" "!=" "kurz" }}
+  {{- $aehnlich := $getestet | first 3 }}
+  {{- with $aehnlich }}
+  <section class="block">
+    <h2>{{ if $kurz }}Ausführlich getestet, im selben Stil{{ else }}Ähnliche Biere{{ end }}</h2>
+    <div class="karten">
+      {{- range . }}{{ partial "biercard.html" . }}{{ end }}
+    </div>
+  </section>
+  {{- end }}
+
+  <p class="klein datum">
+    {{- if $kurz }}Zum ersten Mal getrunken am {{ .Date | time.Format "2. January 2006" }}{{ with .Params.untappd_checkins }}{{ if gt . 1 }}, insgesamt {{ . }} Mal{{ end }}{{ end }}.
+    {{- else }}Getestet am {{ .Date | time.Format "2. January 2006" }}.{{ end }}
+    {{- with .Params.untappd_link }} <a href="{{ . }}" rel="noopener">Auf Untappd ansehen</a>{{ end }}
+  </p>
+</article>
+{{ end }}

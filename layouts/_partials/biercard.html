@@ -1,0 +1,27 @@
+{{- /* Karte für einen Biertest in Listen. Kontext: die Seite des Tests */ -}}
+{{- $kurz := eq .Params.stufe "kurz" }}
+{{- $stilprofil := "" }}
+{{- with .Params.stile }}{{ with index hugo.Data.stile (index . 0) }}{{ $stilprofil = .profil }}{{ end }}{{ end }}
+<article class="karte{{ if $kurz }} karte--kurz{{ end }}">
+  <a class="karte__link" href="{{ .RelPermalink }}">
+    <div class="karte__netz">
+      {{- with .Params.profil }}
+        {{ partial "spinnennetz.html" (dict "profil" . "klein" true) }}
+      {{- else }}{{ with $stilprofil }}
+        {{ partial "spinnennetz.html" (dict "profil" . "klein" true "typisch" true) }}
+      {{- else }}
+        <span class="karte__ohne" aria-hidden="true">🍺</span>
+      {{- end }}{{ end }}
+    </div>
+    <div class="karte__text">
+      {{- if $kurz }}<p class="marke-kurz">Kurz notiert</p>{{ end }}
+      <h3 class="karte__titel">{{ .Title }}</h3>
+      <p class="karte__meta">
+        {{- with .Params.brauerei }}{{ . }}{{ end -}}
+        {{- with .Params.stile }}{{ if $.Params.brauerei }} · {{ end }}{{ delimit . ", " }}{{ end -}}
+        {{- with .Params.alkohol }} · {{ lang.FormatNumber 1 . }} % vol{{ end -}}
+      </p>
+      {{- with .Params.fazit }}<p class="karte__fazit">{{ . }}</p>{{ end }}
+    </div>
+  </a>
+</article>

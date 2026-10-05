@@ -1,0 +1,74 @@
+{{- /*
+  Spinnennetz für das Geschmacksprofil.
+  Aufruf: {{ partial "spinnennetz.html" (dict "profil" .Params.profil "vergleich" $stilprofil "klein" false "label" "…") }}
+  profil:    Map mit bittere, malz, frucht, roest, koerper (je 1 bis 5)
+  vergleich: optional, zweites Profil (z. B. typisch für den Stil), gestrichelt
+  klein:     true = Vorschau ohne Beschriftung
+  typisch:   true = zeigt das typische Stilprofil (gestrichelt, blasser), nicht ein bewertetes Bier
+*/ -}}
+{{- $profil := .profil -}}
+{{- $vergleich := .vergleich -}}
+{{- $klein := .klein | default false -}}
+{{- $typisch := .typisch | default false -}}
+{{- $merkmale := hugo.Data.profil.merkmale -}}
+{{- /* Richtungen der fünf Achsen: oben, dann im Uhrzeigersinn (Winkel -90, -18, 54, 126, 198 Grad) */ -}}
+{{- $dir := slice (slice 0.0 -1.0) (slice 0.9511 -0.3090) (slice 0.5878 0.8090) (slice -0.5878 0.8090) (slice -0.9511 -0.3090) -}}
+{{- $cx := 130.0 -}}{{- $cy := 120.0 -}}{{- $R := 80.0 -}}
+{{- $vb := "0 0 260 235" -}}
+{{- if $klein }}{{ $cx = 100.0 }}{{ $cy = 100.0 }}{{ $R = 90.0 }}{{ $vb = "0 0 200 200" }}{{ end -}}
+
+{{- /* Punkte für ein Profil berechnen */ -}}
+{{- $punkte := slice -}}
+{{- $beschreibung := slice -}}
+{{- range $i, $m := $merkmale -}}
+  {{- $v := index $profil $m.key | default 0 | float -}}
+  {{- $d := index $dir $i -}}
+  {{- $x := add $cx (mul (index $d 0) (mul $R (div $v 5.0))) -}}
+  {{- $y := add $cy (mul (index $d 1) (mul $R (div $v 5.0))) -}}
+  {{- $punkte = $punkte | append (printf "%.1f,%.1f" $x $y) -}}
+  {{- $beschreibung = $beschreibung | append (printf "%s %d von 5" $m.name (int $v)) -}}
+{{- end -}}
+{{- $vpunkte := slice -}}
+{{- with $vergleich -}}
+  {{- range $i, $m := $merkmale -}}
+    {{- $v := index $vergleich $m.key | default 0 | float -}}
+    {{- $d := index $dir $i -}}
+    {{- $vpunkte = $vpunkte | append (printf "%.1f,%.1f" (add $cx (mul (index $d 0) (mul $R (div $v 5.0)))) (add $cy (mul (index $d 1) (mul $R (div $v 5.0))))) -}}
+  {{- end -}}
+{{- end -}}
+
+<svg class="netz{{ if $klein }} netz--klein{{ end }}{{ if $typisch }} netz--typisch{{ end }}" viewBox="{{ $vb }}" role="img" aria-label="{{ if $typisch }}Typisches Profil des Stils{{ else }}Geschmacksprofil{{ end }}: {{ delimit $beschreibung ", " }}">
+  {{- /* Ringe für die Stufen 1 bis 5 */ -}}
+  {{- range $s := seq 5 -}}
+    {{- $ring := slice -}}
+    {{- range $d := $dir -}}
+      {{- $ring = $ring | append (printf "%.1f,%.1f" (add $cx (mul (index $d 0) (mul $R (div (float $s) 5.0)))) (add $cy (mul (index $d 1) (mul $R (div (float $s) 5.0))))) -}}
+    {{- end }}
+  <polygon class="netz__ring{{ if eq $s 5 }} netz__ring--aussen{{ end }}" points="{{ delimit $ring " " }}"/>
+  {{- end -}}
+  {{- /* Achsen */ -}}
+  {{- range $d := $dir }}
+  <line class="netz__achse" x1="{{ $cx }}" y1="{{ $cy }}" x2="{{ printf "%.1f" (add $cx (mul (index $d 0) $R)) }}" y2="{{ printf "%.1f" (add $cy (mul (index $d 1) $R)) }}"/>
+  {{- end }}
+  {{- with $vpunkte }}
+  <polygon class="netz__vergleich" points="{{ delimit . " " }}"/>
+  {{- end }}
+  <polygon class="netz__flaeche" points="{{ delimit $punkte " " }}"/>
+  {{- if not $klein -}}
+    {{- range $p := $punkte -}}
+      {{- $xy := split $p "," }}
+  <circle class="netz__punkt" cx="{{ index $xy 0 }}" cy="{{ index $xy 1 }}" r="3.5"/>
+    {{- end -}}
+    {{- /* Beschriftung außen */ -}}
+    {{- range $i, $m := $merkmale -}}
+      {{- $d := index $dir $i -}}
+      {{- $lx := add $cx (mul (index $d 0) (add $R 16.0)) -}}
+      {{- $ly := add $cy (mul (index $d 1) (add $R 16.0)) -}}
+      {{- $anchor := "middle" -}}
+      {{- if gt (index $d 0) 0.3 }}{{ $anchor = "start" }}{{ else if lt (index $d 0) -0.3 }}{{ $anchor = "end" }}{{ end -}}
+      {{- if gt (index $d 1) 0.5 }}{{ $ly = add $ly 8.0 }}{{ end -}}
+      {{- $v := index $profil $m.key | default 0 }}
+  <text class="netz__label" x="{{ printf "%.1f" $lx }}" y="{{ printf "%.1f" $ly }}" text-anchor="{{ $anchor }}">{{ $m.kurz | default $m.name }}&#160;<tspan class="netz__wert">{{ $v }}</tspan></text>
+    {{- end -}}
+  {{- end }}
+</svg>

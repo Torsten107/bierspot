@@ -1,0 +1,52 @@
+{{ define "main" }}
+{{- $name := .Title }}
+{{- $stil := index hugo.Data.stile $name }}
+<article class="artikel">
+  <header class="seitenkopf">
+    <p class="seitenkopf__dach"><a href="{{ "stile/" | relURL }}">Bierstil</a></p>
+    <h1>{{ $name }}</h1>
+  </header>
+
+  {{- with $stil }}
+  <section class="profil">
+    <div class="profil__netz">{{ partial "spinnennetz.html" (dict "profil" .profil) }}</div>
+    <div class="profil__text">
+      <h2>Typisches Profil</h2>
+      <p class="fazit">{{ .text }}</p>
+      <p class="klein">Die Werte zeigen, wie ein typisches {{ $name }} schmeckt. Einzelne Biere können davon abweichen.</p>
+    </div>
+  </section>
+  {{- end }}
+
+  {{- $gerichte := slice }}
+  {{- range hugo.Data.pairing.gerichte }}
+    {{- $g := .name }}
+    {{- range .biere }}{{ if eq .stil $name }}{{ $gerichte = $gerichte | append $g }}{{ end }}{{ end }}
+  {{- end }}
+  {{- with $gerichte }}
+  <section class="block">
+    <h2>Passt gut zu</h2>
+    <ul class="chips">
+      {{- range . }}<li><a class="chip" href="{{ "food-pairing/" | relURL }}?gericht={{ . | urlquery }}">{{ . }}</a></li>{{ end }}
+    </ul>
+  </section>
+  {{- end }}
+
+  {{- $getestet := where .Pages "Params.stufe" "!=" "kurz" }}
+  {{- $kurz := where .Pages "Params.stufe" "kurz" }}
+  {{- with $getestet }}
+  <section class="block">
+    <h2>Ausführlich getestet</h2>
+    <div class="karten">
+      {{- range . }}{{ partial "biercard.html" . }}{{ end }}
+    </div>
+  </section>
+  {{- end }}
+  {{- with $kurz }}
+  <section class="block">
+    <h2>Kurz notiert</h2>
+    {{ partial "kurzliste.html" (dict "seiten" . "id" "stil" "stilspalte" false) }}
+  </section>
+  {{- end }}
+</article>
+{{ end }}

@@ -1,0 +1,11 @@
+{{ define "main" }}
+<article class="artikel">
+  <header class="seitenkopf">
+    <h1>{{ .Title }}</h1>
+  </header>
+  {{ partial "stand.html" . }}
+  <div class="inhalt">
+    {{ .Content }}
+  </div>
+</article>
+{{ end }}

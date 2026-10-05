@@ -1,0 +1,224 @@
+/* bierspot.de — eigenes, schlankes Theme */
+
+:root {
+  --bg: #fbf8f2;
+  --flaeche: #f3ede2;
+  --karte: #ffffff;
+  --text: #24201a;
+  --leise: #6b6256;
+  --linie: #e4dccd;
+  --akzent: #9a5b00;        /* Links, Text in Akzentfarbe */
+  --akzent-hell: #e8a33d;   /* Flächen, Netz */
+  --akzent-zart: #fbebd0;
+  --schaum: #fff7e6;
+  --radius: 14px;
+  --max: 68rem;
+  --text-max: 42rem;
+  --schrift: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --schrift-titel: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1b1916;
+    --flaeche: #24211d;
+    --karte: #2a2622;
+    --text: #ece6dc;
+    --leise: #b0a698;
+    --linie: #3d3832;
+    --akzent: #f0b453;
+    --akzent-hell: #e8a33d;
+    --akzent-zart: #3b2f1e;
+    --schaum: #3a342c;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 1.0625rem/1.65 var(--schrift);
+}
+
+a { color: var(--akzent); text-underline-offset: 0.15em; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 3px solid var(--akzent-hell); outline-offset: 2px; border-radius: 4px; }
+
+h1, h2, h3 { font-family: var(--schrift-titel); line-height: 1.2; font-weight: 700; }
+h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); margin: 0 0 0.4em; }
+h2 { font-size: 1.5rem; margin: 1.8em 0 0.5em; }
+h3 { font-size: 1.2rem; margin: 1.4em 0 0.4em; }
+
+img { max-width: 100%; height: auto; }
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: 16px; top: 8px; background: var(--karte); padding: 8px 12px; z-index: 10; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Kopf */
+.kopf { border-bottom: 1px solid var(--linie); background: var(--bg); }
+.kopf__inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 14px; padding-bottom: 14px; }
+.marke { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-family: var(--schrift-titel); font-weight: 700; font-size: 1.4rem; }
+.marke__icon { width: 30px; height: 30px; }
+.marke__icon rect { fill: var(--akzent-hell); }
+.marke__icon .henkel { fill: none; stroke: var(--akzent-hell); stroke-width: 2.5; }
+.marke__icon .schaum { fill: var(--schaum); stroke: var(--akzent-hell); stroke-width: 1; }
+.nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 4px 18px; flex-wrap: wrap; }
+.nav a { color: var(--text); text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent; }
+.nav a:hover { border-bottom-color: var(--linie); }
+.nav a[aria-current="page"] { border-bottom-color: var(--akzent-hell); }
+
+main.wrap { padding-top: 32px; padding-bottom: 64px; }
+
+/* Startseite */
+.buehne { padding: 24px 0 8px; max-width: 46rem; }
+.buehne__dach { color: var(--leise); margin: 0 0 8px; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.85rem; }
+.buehne__titel { font-size: clamp(2rem, 5vw, 3rem); }
+.buehne__aktionen { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+
+.knopf { display: inline-block; background: var(--akzent-hell); color: #241a08; text-decoration: none; font-weight: 600; padding: 12px 18px; border-radius: 999px; }
+.knopf:hover { filter: brightness(1.05); }
+.knopf--leise { background: transparent; color: var(--text); border: 1px solid var(--linie); }
+
+.block { margin-top: 48px; }
+.block__kopf { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.block__kopf h2 { margin: 0 0 16px; }
+
+.teaser { display: grid; grid-template-columns: 1fr; gap: 16px; align-items: center; background: var(--flaeche); border-radius: var(--radius); padding: 24px; }
+.teaser h2 { margin-top: 0; }
+.teaser__bild { margin: 0; justify-self: center; text-align: center; }
+.teaser .netz { max-width: 320px; }
+@media (min-width: 720px) { .teaser { grid-template-columns: 1.2fr 1fr; } }
+
+.liste { padding-left: 1.2em; }
+.liste li { margin: 4px 0; }
+
+/* Karten */
+.karten { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.karte { background: var(--karte); border: 1px solid var(--linie); border-radius: var(--radius); }
+.karte__link { display: flex; gap: 14px; padding: 14px; text-decoration: none; color: inherit; height: 100%; }
+.karte__link:hover { background: var(--flaeche); border-radius: var(--radius); }
+.karte__netz { flex: 0 0 88px; display: grid; place-items: center; }
+.karte__netz .netz { width: 88px; height: 88px; }
+.karte__ohne { font-size: 2.2rem; }
+.karte__titel { font-size: 1.1rem; margin: 2px 0 4px; color: var(--text); }
+.karte__meta { color: var(--leise); font-size: 0.88rem; margin: 0 0 6px; }
+.karte__fazit { font-size: 0.95rem; margin: 0; }
+
+/* Seiten und Artikel */
+.seitenkopf { margin-bottom: 24px; }
+.seitenkopf__dach { margin: 0 0 6px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.seitenkopf__dach a { text-decoration: none; }
+.einleitung { color: var(--leise); max-width: var(--text-max); }
+.inhalt { max-width: var(--text-max); }
+.inhalt table, .tabelle table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+.inhalt th, .inhalt td, .tabelle th, .tabelle td { border-bottom: 1px solid var(--linie); padding: 8px 10px; text-align: left; vertical-align: top; }
+.inhalt thead th, .tabelle thead th { border-bottom: 2px solid var(--linie); }
+.inhalt .tabelle, .inhalt > table { display: block; overflow-x: auto; }
+.tabelle { overflow-x: auto; margin: 1em 0; }
+.inhalt blockquote { margin: 1em 0; padding: 4px 16px; border-left: 4px solid var(--akzent-hell); color: var(--leise); }
+
+.hinweis { background: var(--akzent-zart); border-radius: 10px; padding: 12px 16px; max-width: var(--text-max); }
+.klein { font-size: 0.9rem; color: var(--leise); }
+.datum { margin-top: 40px; }
+
+.beitragsliste { list-style: none; padding: 0; margin: 0; max-width: var(--text-max); }
+.beitragsliste li { padding: 16px 0; border-bottom: 1px solid var(--linie); }
+.beitragsliste h2 { margin: 0 0 6px; font-size: 1.3rem; }
+.beitragsliste a { text-decoration: none; }
+.beitragsliste p { margin: 0; color: var(--leise); }
+.pager { display: flex; gap: 16px; align-items: center; margin-top: 24px; }
+
+/* Biertest */
+.steckbrief { display: flex; flex-wrap: wrap; gap: 8px 28px; margin: 12px 0 0; }
+.steckbrief div { display: flex; flex-direction: column; }
+.steckbrief dt { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--leise); }
+.steckbrief dd { margin: 0; font-weight: 600; }
+
+.profil { display: grid; grid-template-columns: 1fr; gap: 8px 32px; align-items: center; background: var(--flaeche); border-radius: var(--radius); padding: 20px; margin: 8px 0 32px; }
+.profil__netz .netz { width: 100%; max-width: 340px; display: block; margin: 0 auto; }
+.profil__text h2 { margin-top: 0; }
+@media (min-width: 720px) { .profil { grid-template-columns: minmax(260px, 1fr) 1.2fr; } }
+.fazit { font-family: var(--schrift-titel); font-size: 1.3rem; line-height: 1.35; margin: 0 0 12px; }
+.legende { font-size: 0.9rem; color: var(--leise); }
+.legende__eigen, .legende__stil { display: inline-block; width: 18px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: middle; }
+.legende__eigen { background: var(--akzent-hell); opacity: 0.75; }
+.legende__stil { border: 2px dashed var(--leise); height: 12px; }
+
+/* Spinnennetz */
+.netz { overflow: visible; }
+.netz__ring { fill: none; stroke: var(--linie); stroke-width: 1; }
+.netz__ring--aussen { stroke-width: 1.5; }
+.netz__achse { stroke: var(--linie); stroke-width: 1; }
+.netz__flaeche { fill: var(--akzent-hell); fill-opacity: 0.45; stroke: var(--akzent-hell); stroke-width: 2.5; stroke-linejoin: round; }
+.netz__vergleich { fill: none; stroke: var(--leise); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.netz__punkt { fill: var(--akzent-hell); stroke: var(--bg); stroke-width: 1.5; }
+.netz__label { font: 600 12px var(--schrift); fill: var(--text); }
+.netz__wert { fill: var(--akzent); }
+.netz--klein .netz__flaeche { stroke-width: 4; }
+.netz--klein .netz__ring, .netz--klein .netz__achse { stroke-width: 2; }
+
+/* Chips */
+.chips { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.chip, .pf__kat, .pf__gericht {
+  display: inline-block; font: inherit; font-size: 0.95rem; color: var(--text); background: var(--karte);
+  border: 1px solid var(--linie); border-radius: 999px; padding: 6px 14px; text-decoration: none; cursor: pointer;
+}
+.chip:hover, .pf__kat:hover, .pf__gericht:hover { border-color: var(--akzent-hell); }
+
+/* Food-Pairing */
+.pf { max-width: 48rem; }
+.pf__suche { width: 100%; font: inherit; padding: 12px 14px; color: var(--text); background: var(--karte); border: 1px solid var(--linie); border-radius: 10px; }
+.pf__kategorien { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+.pf__kat[aria-pressed="true"] { background: var(--akzent-hell); border-color: var(--akzent-hell); color: #241a08; font-weight: 600; }
+.pf__gerichte { display: flex; flex-wrap: wrap; gap: 8px; }
+.pf__gericht[aria-pressed="true"] { background: var(--akzent-zart); border-color: var(--akzent-hell); font-weight: 600; }
+.pf__leer { color: var(--leise); }
+.pf__ergebnis { margin-top: 24px; background: var(--flaeche); border-radius: var(--radius); padding: 20px; }
+.pf__ergebnis h2 { margin: 0 0 12px; }
+.pf__bier { padding: 14px 0; border-top: 1px solid var(--linie); }
+.pf__bier:first-of-type { border-top: 0; padding-top: 0; }
+.pf__bier h3 { margin: 0 0 4px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 1.15rem; }
+.pf__bier p { margin: 4px 0; }
+.pf__prinzip { font-family: var(--schrift); font-size: 0.75rem; font-weight: 600; padding: 2px 9px; border-radius: 999px; background: var(--akzent-zart); color: var(--akzent); }
+.pf__stiltext { color: var(--leise); font-size: 0.93rem; }
+.pf__tipp { margin-top: 12px; }
+.pf__tests { margin-top: 16px; padding-top: 14px; border-top: 2px solid var(--linie); }
+.pf__tests h3 { margin: 0 0 6px; font-size: 1.05rem; }
+.pf__tests ul { margin: 0; padding-left: 1.2em; }
+.pf__tests li { margin-bottom: 6px; }
+.pf__tests li span { display: block; color: var(--leise); font-size: 0.93rem; }
+.prinzipien dl { margin: 0; max-width: var(--text-max); }
+.prinzipien dt { font-weight: 700; }
+.prinzipien dd { margin: 0 0 12px; color: var(--leise); }
+
+/* Fuß */
+.fuss { border-top: 1px solid var(--linie); background: var(--flaeche); padding: 28px 0; }
+.fuss__claim { margin: 0 0 12px; font-family: var(--schrift-titel); font-size: 1.1rem; }
+.fuss ul { list-style: none; padding: 0; margin: 0 0 12px; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.fuss a { color: var(--text); }
+.fuss__klein { margin: 0; color: var(--leise); font-size: 0.85rem; }
+
+/* Kurz notiert */
+.marke-kurz { display: inline-block; margin: 0 0 4px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--leise); border: 1px solid var(--linie); border-radius: 999px; padding: 1px 8px; }
+.karte--kurz { background: transparent; border-style: dashed; }
+.netz--typisch .netz__flaeche { fill-opacity: 0.12; stroke: var(--leise); stroke-dasharray: 5 4; stroke-width: 1.5; }
+.netz--typisch.netz--klein .netz__flaeche { stroke-width: 3; stroke-dasharray: 8 6; }
+.netz--typisch .netz__punkt { fill: var(--leise); }
+.notiz { margin: 0 0 12px; padding: 4px 16px; border-left: 4px solid var(--akzent-hell); font-family: var(--schrift-titel); font-size: 1.2rem; line-height: 1.4; }
+.bewertung { margin: 0 0 12px; }
+.kurzliste__filter { width: 100%; max-width: 28rem; font: inherit; padding: 10px 12px; color: var(--text); background: var(--karte); border: 1px solid var(--linie); border-radius: 10px; }
+.kurzliste__zahl { margin: 8px 0 0; }
+.kurzliste table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+.kurzliste th, .kurzliste td { border-bottom: 1px solid var(--linie); padding: 8px 10px; text-align: left; }
+.kurzliste thead th { border-bottom: 2px solid var(--linie); font-size: 0.85rem; color: var(--leise); }
+.kurzliste .zahl { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pf__tests--kurz h3 { color: var(--leise); }
+.pf__kurzliste { margin: 0; line-height: 1.8; }
+.netz--typisch .netz__wert { fill: var(--leise); }

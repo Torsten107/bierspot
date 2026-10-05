@@ -1,0 +1,60 @@
+{{- /*
+  Kompakte, filterbare Tabelle für kurz notierte Biere.
+  Aufruf: {{ partial "kurzliste.html" (dict "seiten" $kurz "id" "alle" "stilspalte" true) }}
+*/ -}}
+{{- $seiten := .seiten }}
+{{- $id := .id | default "kurz" }}
+{{- $stilspalte := .stilspalte | default true }}
+{{- with $seiten }}
+<div class="kurzliste" data-kurzliste>
+  {{- if gt (len .) 8 }}
+  <label class="vh" for="filter-{{ $id }}">Biere filtern</label>
+  <input class="kurzliste__filter" id="filter-{{ $id }}" type="search" placeholder="Filtern nach Bier, Brauerei oder Stil" autocomplete="off" data-filter>
+  <p class="klein kurzliste__zahl" aria-live="polite" data-zahl>{{ len . }} Biere</p>
+  {{- end }}
+  <div class="tabelle">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Bier</th>
+          <th scope="col">Brauerei</th>
+          {{- if $stilspalte }}<th scope="col">Stil</th>{{ end }}
+          <th scope="col" class="zahl">Alkohol</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{- range sort . "Title" }}
+        <tr>
+          <td><a href="{{ .RelPermalink }}">{{ .Title }}</a></td>
+          <td>{{ .Params.brauerei }}</td>
+          {{- if $stilspalte }}<td>{{ with .Params.stile }}{{ delimit . ", " }}{{ else }}{{ .Params.untappd_stil }}{{ end }}</td>{{ end }}
+          <td class="zahl">{{ with .Params.alkohol }}{{ lang.FormatNumber 1 . }} %{{ end }}</td>
+        </tr>
+        {{- end }}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{- if gt (len .) 8 }}
+<script>
+(function () {
+  document.querySelectorAll("[data-kurzliste]").forEach(function (box) {
+    var feld = box.querySelector("[data-filter]");
+    if (!feld || feld.dataset.bereit) return;
+    feld.dataset.bereit = "1";
+    var zahl = box.querySelector("[data-zahl]");
+    var zeilen = Array.prototype.slice.call(box.querySelectorAll("tbody tr"));
+    feld.addEventListener("input", function () {
+      var q = feld.value.trim().toLowerCase(), n = 0;
+      zeilen.forEach(function (z) {
+        var treffer = z.textContent.toLowerCase().indexOf(q) !== -1;
+        z.hidden = !treffer;
+        if (treffer) n++;
+      });
+      zahl.textContent = n + (n === 1 ? " Bier" : " Biere");
+    });
+  });
+})();
+</script>
+{{- end }}
+{{- end }}

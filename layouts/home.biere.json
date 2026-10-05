@@ -1,0 +1,16 @@
+{{- $biere := slice -}}
+{{- range where site.RegularPages "Section" "biertests" -}}
+  {{- $biere = $biere | append (dict
+      "titel" .Title
+      "stufe" (.Params.stufe | default "getestet")
+      "url" .Permalink
+      "datum" (.Date.Format "2006-01-02")
+      "brauerei" (.Params.brauerei | default "")
+      "stile" (.Params.stile | default slice)
+      "alkohol" .Params.alkohol
+      "profil" .Params.profil
+      "passt_zu" (.Params.passt_zu | default slice)
+      "fazit" (.Params.fazit | default "")
+  ) -}}
+{{- end -}}
+{{- $biere | jsonify (dict "indent" "  ") -}}

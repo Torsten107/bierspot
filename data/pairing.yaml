@@ -1,0 +1,135 @@
+# Daten für den Food-Pairing-Finder.
+# stil: muss genauso heißen wie in content/stile/ bzw. im Feld "stile" der Biertests.
+# prinzip: Ergänzen, Kontrast oder Schneiden.
+
+prinzipien:
+  - name: Ergänzen
+    text: "Ähnliche Aromen verstärken sich, zum Beispiel Röstaromen im Bier zu einer knusprigen Kruste."
+  - name: Kontrast
+    text: "Gegensätze gleichen sich aus, zum Beispiel ein süßes, kräftiges Bier zu salzigem Käse."
+  - name: Schneiden
+    text: "Bittere und Kohlensäure räumen den Gaumen auf, gut bei fettigen Speisen."
+
+gerichte:
+  # Deftig
+  - name: Schweinebraten
+    kategorie: Deftig
+    biere:
+      - { stil: Dunkles, prinzip: Ergänzen, warum: "Die Röstaromen des Biers treffen die knusprige Kruste." }
+      - { stil: Märzen, prinzip: Ergänzen, warum: "Das Karamellige passt zur Soße und zum Fleisch." }
+  - name: Bratwurst
+    kategorie: Deftig
+    biere:
+      - { stil: Pils, prinzip: Schneiden, warum: "Die Hopfenbittere räumt das Fett vom Gaumen." }
+      - { stil: Märzen, prinzip: Ergänzen, warum: "Malzige Süße ergänzt die gegrillten Aromen." }
+      - { stil: Altbier, prinzip: Ergänzen, warum: "Malz und leichte Röstnoten passen zum Grill, die Bittere hält gegen das Fett." }
+  - name: Schnitzel
+    kategorie: Deftig
+    biere:
+      - { stil: Helles, prinzip: Ergänzen, warum: "Mild genug, um die Panade nicht zu übertönen." }
+      - { stil: Pils, prinzip: Schneiden, warum: "Frische Bittere gegen das Fett der Panade." }
+  - name: Gulasch
+    kategorie: Deftig
+    biere:
+      - { stil: Bock, prinzip: Ergänzen, warum: "Kräftiges Bier für ein kräftiges Gericht." }
+      - { stil: Schwarzbier, prinzip: Ergänzen, warum: "Röstnoten passen zu Paprika und Schmorsoße." }
+      - { stil: Altbier, prinzip: Ergänzen, warum: "Kräftig und leicht röstig, passt zur dunklen Schmorsoße." }
+  - name: Burger
+    kategorie: Deftig
+    biere:
+      - { stil: Pale Ale, prinzip: Schneiden, warum: "Fruchtiger Hopfen gegen Fleisch und Käse." }
+      - { stil: IPA, prinzip: Schneiden, warum: "Kräftige Bittere hält gegen Fett, Käse und Röstaromen." }
+      - { stil: Märzen, prinzip: Ergänzen, warum: "Karamellnoten passen zu Röstzwiebeln und Grillaromen." }
+
+  # Leicht
+  - name: Spargel
+    kategorie: Leicht
+    biere:
+      - { stil: Weißbier, prinzip: Ergänzen, warum: "Fruchtig und mild, übertönt den feinen Spargel nicht." }
+      - { stil: Helles, prinzip: Ergänzen, warum: "Zurückhaltend und passend zur Sauce hollandaise." }
+  - name: Salat
+    kategorie: Leicht
+    biere:
+      - { stil: Kölsch, prinzip: Ergänzen, warum: "Leicht und frisch wie der Salat." }
+      - { stil: Witbier, prinzip: Ergänzen, warum: "Zitrusnoten passen zu Dressing und Kräutern." }
+  - name: Gebratener Fisch
+    kategorie: Leicht
+    biere:
+      - { stil: Kölsch, prinzip: Ergänzen, warum: "Leicht und spritzig, lässt dem Fisch den Vortritt." }
+      - { stil: Pils, prinzip: Schneiden, warum: "Herbe Frische gegen das Bratfett." }
+  - name: Meeresfrüchte
+    kategorie: Leicht
+    biere:
+      - { stil: Witbier, prinzip: Ergänzen, warum: "Koriander und Orange wirken wie ein Spritzer Zitrone." }
+      - { stil: Pils, prinzip: Schneiden, warum: "Klar und trocken, passt zu salzigen Aromen." }
+  - name: Hähnchen
+    kategorie: Leicht
+    biere:
+      - { stil: Weißbier, prinzip: Ergänzen, warum: "Fruchtig-würzig, passt zu hellem Fleisch." }
+      - { stil: Pale Ale, prinzip: Ergänzen, warum: "Hopfenfrucht passt zu Kräutern und Grillaromen." }
+
+  # International
+  - name: Pizza
+    kategorie: International
+    biere:
+      - { stil: Pils, prinzip: Schneiden, warum: "Bittere gegen Käse, Kohlensäure gegen Fett." }
+      - { stil: Märzen, prinzip: Ergänzen, warum: "Malzige Süße passt zu Tomate und Teig." }
+  - name: Scharfes Curry
+    kategorie: International
+    hinweis: "Starke Hopfenbittere wie im IPA kann die Schärfe verstärken."
+    biere:
+      - { stil: Weißbier, prinzip: Kontrast, warum: "Mild und leicht süßlich, dämpft die Schärfe." }
+      - { stil: Helles, prinzip: Kontrast, warum: "Wenig Bitterkeit, deshalb brennt es nicht stärker." }
+  - name: Sushi
+    kategorie: International
+    biere:
+      - { stil: Pils, prinzip: Ergänzen, warum: "Klar und trocken wie der Reis." }
+      - { stil: Witbier, prinzip: Ergänzen, warum: "Zitrusnoten passen zu Fisch und Ingwer." }
+  - name: Tacos
+    kategorie: International
+    biere:
+      - { stil: Helles, prinzip: Kontrast, warum: "Mild und erfrischend neben Chili und Gewürzen." }
+      - { stil: Witbier, prinzip: Ergänzen, warum: "Koriander trifft auf Koriander." }
+
+  # Käse & Brotzeit
+  - name: Obatzda und Brezn
+    kategorie: Käse & Brotzeit
+    biere:
+      - { stil: Weißbier, prinzip: Ergänzen, warum: "Der Klassiker im Biergarten." }
+      - { stil: Helles, prinzip: Ergänzen, warum: "Mild und rund zu Käse und Paprika." }
+  - name: Camembert
+    kategorie: Käse & Brotzeit
+    biere:
+      - { stil: Weißbier, prinzip: Ergänzen, warum: "Fruchtige Noten passen zum milden Käse." }
+      - { stil: Kölsch, prinzip: Schneiden, warum: "Spritzig gegen die cremige Konsistenz." }
+  - name: Bergkäse
+    kategorie: Käse & Brotzeit
+    biere:
+      - { stil: Bock, prinzip: Ergänzen, warum: "Kräftiges Malz zu kräftigem Käse." }
+      - { stil: Märzen, prinzip: Ergänzen, warum: "Nussige und karamellige Noten treffen sich." }
+  - name: Blauschimmelkäse
+    kategorie: Käse & Brotzeit
+    biere:
+      - { stil: Doppelbock, prinzip: Kontrast, warum: "Süßes Malz gegen salzigen, würzigen Käse." }
+      - { stil: Stout, prinzip: Kontrast, warum: "Röstaromen und Süße gleichen das Salzige aus." }
+
+  # Süß
+  - name: Schokoladenkuchen
+    kategorie: Süß
+    biere:
+      - { stil: Stout, prinzip: Ergänzen, warum: "Kaffee- und Schokoladennoten verstärken sich." }
+      - { stil: Porter, prinzip: Ergänzen, warum: "Weich und röstig zur Schokolade." }
+  - name: Apfelstrudel
+    kategorie: Süß
+    biere:
+      - { stil: Weizenbock, prinzip: Ergänzen, warum: "Fruchtig und kräftig zu Apfel und Zimt." }
+      - { stil: Märzen, prinzip: Ergänzen, warum: "Karamellnoten passen zum gebackenen Teig." }
+  - name: Vanilleeis
+    kategorie: Süß
+    biere:
+      - { stil: Stout, prinzip: Kontrast, warum: "Bitter-röstig zu süß-cremig, wie ein Affogato." }
+  - name: Käsekuchen
+    kategorie: Süß
+    biere:
+      - { stil: Fruchtbier, prinzip: Ergänzen, warum: "Frische Säure wie ein Fruchtspiegel." }
+      - { stil: Witbier, prinzip: Ergänzen, warum: "Zitrusnoten passen zur leichten Säure." }

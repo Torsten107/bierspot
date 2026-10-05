@@ -1,0 +1,23 @@
+{{ define "main" }}
+{{- $getestet := where .Pages "Params.stufe" "!=" "kurz" }}
+{{- $kurz := where .Pages "Params.stufe" "kurz" }}
+<header class="seitenkopf">
+  <h1>{{ .Title }}</h1>
+  {{- with .Content }}<div class="einleitung">{{ . }}</div>{{ end }}
+</header>
+
+<section aria-labelledby="getestet">
+  <h2 id="getestet" class="vh">Ausführlich getestet</h2>
+  <div class="karten">
+    {{- range $getestet }}{{ partial "biercard.html" . }}{{ end }}
+  </div>
+</section>
+
+{{- with $kurz }}
+<section class="block" aria-labelledby="kurz">
+  <h2 id="kurz">Kurz notiert</h2>
+  <p class="einleitung">Diese Biere habe ich getrunken, aber noch nicht ausführlich getestet. Nach und nach werden einige davon zu richtigen Tests.</p>
+  {{ partial "kurzliste.html" (dict "seiten" . "id" "alle") }}
+</section>
+{{- end }}
+{{ end }}

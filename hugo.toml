@@ -1,0 +1,80 @@
+baseURL = "https://bierspot.de/"
+locale = "de-DE"
+defaultContentLanguage = "de"
+title = "Bierspot"
+enableRobotsTXT = true
+summaryLength = 40
+
+[params]
+  description = "Ehrliche Biertests, die dir erklären, was zu deinem Essen passt und warum."
+  untertitel = "Für Freunde des Bieres"
+  # Bei kurz notierten Bieren die eigene Untappd-Bewertung anzeigen (true/false)
+  zeigeUntappdBewertung = true
+
+# Stil-Seiten: Im Front Matter heißt das Feld "stile", die Seiten liegen unter /stile/
+[taxonomies]
+  stil = "stile"
+
+# Stil-Seiten mit einfachen Adressen, z. B. /stile/maerzen/ (siehe content/stile/)
+[permalinks.term]
+  stile = "/stile/:slug/"
+
+# Zusätzliche Datei /biere.json mit allen Biertests, für Tools
+[outputFormats.biere]
+  mediaType = "application/json"
+  baseName = "biere"
+  isPlainText = true
+  notAlternative = true
+
+[outputs]
+  home = ["HTML", "RSS", "biere"]
+  section = ["HTML", "RSS"]
+
+# Ähnliche Biere: Hugo vergleicht Stil und passende Gerichte
+[related]
+  includeNewer = true
+  threshold = 50
+  toLower = true
+  [[related.indices]]
+    name = "stile"
+    weight = 100
+  [[related.indices]]
+    name = "passt_zu"
+    weight = 60
+
+[menus]
+  [[menus.main]]
+    name = "Biertests"
+    pageRef = "/biertests"
+    weight = 10
+  [[menus.main]]
+    name = "Food-Pairing"
+    pageRef = "/food-pairing"
+    weight = 20
+  [[menus.main]]
+    name = "Bierstile"
+    pageRef = "/stile"
+    weight = 30
+  [[menus.main]]
+    name = "Beiträge"
+    pageRef = "/posts"
+    weight = 40
+
+  [[menus.footer]]
+    name = "So bewerte ich"
+    pageRef = "/so-bewerte-ich"
+    weight = 10
+  [[menus.footer]]
+    name = "Impressum"
+    pageRef = "/impressum"
+    weight = 20
+  [[menus.footer]]
+    name = "Datenschutz"
+    pageRef = "/datenschutz"
+    weight = 30
+
+[markup.goldmark.renderer]
+  unsafe = false
+
+[pagination]
+  pagerSize = 12

@@ -1,0 +1,63 @@
+# Übersetzt Untappd-Stile auf die eigene Stil-Liste in data/stile.yaml.
+# Das Import-Skript geht die Liste von oben nach unten durch und nimmt den ersten Treffer.
+# "beginnt" = der Untappd-Stil beginnt mit diesem Text (Groß- und Kleinschreibung egal).
+# Spezielle Einträge deshalb immer VOR allgemeinen eintragen, z. B. "Bock - Weizenbock" vor "Bock".
+# Untappd-Stile ohne Treffer bekommen keinen eigenen Stil und werden nach dem Import aufgelistet.
+
+zuordnung:
+  # Weizen
+  - { beginnt: "Bock - Weizenbock", stil: "Weizenbock" }
+  - { beginnt: "Wheat Beer - Hefeweizen", stil: "Weißbier" }
+  - { beginnt: "Wheat Beer - Dunkelweizen", stil: "Weißbier" }
+  - { beginnt: "Wheat Beer - Kristallweizen", stil: "Weißbier" }
+  - { beginnt: "Wheat Beer - Witbier", stil: "Witbier" }
+  - { beginnt: "Witbier", stil: "Witbier" }
+
+  # Bock
+  - { beginnt: "Bock - Doppelbock", stil: "Doppelbock" }
+  - { beginnt: "Bock - Eisbock", stil: "Doppelbock" }
+  - { beginnt: "Bock", stil: "Bock" }
+
+  # Lager
+  - { beginnt: "Lager - Helles", stil: "Helles" }
+  - { beginnt: "Lager - Munich Helles", stil: "Helles" }
+  - { beginnt: "Lager - Munich Dunkel", stil: "Dunkles" }
+  - { beginnt: "Lager - Dunkel", stil: "Dunkles" }
+  - { beginnt: "Lager - Dark", stil: "Dunkles" }
+  - { beginnt: "Lager - Märzen", stil: "Märzen" }
+  - { beginnt: "Märzen", stil: "Märzen" }
+  - { beginnt: "Lager - Vienna", stil: "Märzen" }
+  - { beginnt: "Festbier", stil: "Märzen" }
+  - { beginnt: "Schwarzbier", stil: "Schwarzbier" }
+  - { beginnt: "Pilsner", stil: "Pils" }
+  - { beginnt: "Lager - Pilsner", stil: "Pils" }
+  - { beginnt: "Kellerbier", stil: "Helles" }
+  - { beginnt: "Lager - Kellerbier", stil: "Helles" }
+  - { beginnt: "Lager - Zwickelbier", stil: "Helles" }
+  - { beginnt: "Lager - Pale", stil: "Helles" }
+  - { beginnt: "Lager - American", stil: "Helles" }
+  - { beginnt: "Lager - Other Light", stil: "Helles" }
+  - { beginnt: "Lager - Amber / Red", stil: "Märzen" }
+  - { beginnt: "Lager - IPL", stil: "Pils" }
+
+  # Alkoholfrei: dem passenden Grundstil zuordnen (der Alkoholgehalt zeigt, dass es alkoholfrei ist)
+  - { beginnt: "Non-Alcoholic - Wheat", stil: "Weißbier" }
+  - { beginnt: "Non-Alcoholic - Pale Ale", stil: "Pale Ale" }
+  - { beginnt: "Non-Alcoholic - IPA", stil: "IPA" }
+  - { beginnt: "Non-Alcoholic - Lager", stil: "Helles" }
+
+  # Altbier
+  - { beginnt: "Altbier", stil: "Altbier" }
+
+  # Obergärig hell
+  - { beginnt: "Kölsch", stil: "Kölsch" }
+  - { beginnt: "IPA", stil: "IPA" }
+  - { beginnt: "Pale Ale", stil: "Pale Ale" }
+
+  # Dunkel
+  - { beginnt: "Stout", stil: "Stout" }
+  - { beginnt: "Porter", stil: "Porter" }
+
+  # Frucht
+  - { beginnt: "Fruit Beer", stil: "Fruchtbier" }
+  - { beginnt: "Sour - Fruited", stil: "Fruchtbier" }

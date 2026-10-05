@@ -1,0 +1,43 @@
+{{ define "main" }}
+{{- /* Daten für das Tool: Gerichte, Stile und alle Biertests */ -}}
+{{- $biere := slice }}
+{{- range where site.RegularPages "Section" "biertests" }}
+  {{- $biere = $biere | append (dict "titel" .Title "url" .RelPermalink "stile" (.Params.stile | default slice) "passt_zu" (.Params.passt_zu | default slice) "fazit" (.Params.fazit | default "") "kurz" (eq .Params.stufe "kurz")) }}
+{{- end }}
+{{- $stiltexte := dict }}
+{{- $stillinks := dict }}
+{{- range site.Taxonomies.stile }}{{ $stillinks = merge $stillinks (dict .Page.Title .Page.RelPermalink) }}{{ end }}
+{{- range $name, $s := hugo.Data.stile }}
+  {{- $stiltexte = merge $stiltexte (dict $name $s.text) }}
+{{- end }}
+{{- $daten := dict "gerichte" hugo.Data.pairing.gerichte "stile" $stiltexte "stillinks" $stillinks "biere" $biere }}
+
+<article class="pairing">
+  <header class="seitenkopf">
+    <h1>{{ .Title }}</h1>
+    {{- with .Content }}<div class="einleitung">{{ . }}</div>{{ end }}
+  </header>
+
+  <div class="pf">
+    <label for="pf-suche" class="vh">Gericht suchen</label>
+    <input id="pf-suche" class="pf__suche" type="search" placeholder="Gericht suchen, zum Beispiel Pizza" autocomplete="off">
+    <div class="pf__kategorien" role="group" aria-label="Kategorien"></div>
+    <div class="pf__gerichte"></div>
+    <div class="pf__ergebnis" hidden aria-live="polite"></div>
+  </div>
+
+  <section class="block prinzipien">
+    <h2>Drei Faustregeln</h2>
+    <dl>
+      {{- range hugo.Data.pairing.prinzipien }}
+      <dt>{{ .name }}</dt>
+      <dd>{{ .text }}</dd>
+      {{- end }}
+    </dl>
+  </section>
+</article>
+
+<script id="pf-daten" type="application/json">{{ $daten | jsonify | safeJS }}</script>
+{{- $js := resources.Get "js/pairing.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+{{ end }}
