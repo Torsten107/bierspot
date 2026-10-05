@@ -6,7 +6,7 @@ enableRobotsTXT = true
 summaryLength = 40
 
 [params]
-  description = "Ehrliche Biertests, die dir erklären, was zu deinem Essen passt und warum."
+  description = "Biertests und Empfehlungen, welches Bier zu deinem Essen passt"
   untertitel = "Für Freunde des Bieres"
   # Bei kurz notierten Bieren die eigene Untappd-Bewertung anzeigen (true/false)
   zeigeUntappdBewertung = true
